@@ -1,1 +1,1 @@
-{"version":3,"file":"Board.js","sourceRoot":"","sources":["../../typescript/classes/Board.ts"],"names":[],"mappings":""}
+{"version":3,"file":"Board.js","sourceRoot":"","sources":["../../typescript/classes/Board.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,OAAO,OAAO,KAAK;IAGxB;QACE,IAAI,CAAC,IAAI,GAAG,CAAC,GAAG,IAAI,KAAK,CAAC,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,GAAG,EAAE,CAAC,CAAC,GAAG,IAAI,KAAK,CAAC,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,GAAG,EAAE,CAAC,GAAG,CAAC,CAAC,CAAC;IAC5E,CAAC;CACF"}
