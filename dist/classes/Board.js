@@ -5,7 +5,6 @@ export default class Board {
         this.winner = false;
         this.isADraw = false;
         this.gameOver = false;
-        console.log(this.currentPlayerColor);
     }
     render() {
         let line = "\n" + "-".repeat(29) + "\n";
