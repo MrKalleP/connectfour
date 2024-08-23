@@ -6,6 +6,7 @@ export default class Board {
       Array.from({ length: 6 }, () => " ")
     );
   }
+
   render() {
     let line = "\n" + "-".repeat(29) + "\n";
     console.log(
