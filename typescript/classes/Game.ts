@@ -14,8 +14,8 @@ export default class Game {
   }
 
   createPlayers() {
-    const playerXName = prompt("Spelare X:s namn: ") || "Spelare X";
-    const playerOName = prompt("Spelare O:s namn: ") || "Spelare O";
+    const playerXName = prompt("Player X:s namne: ") || "Player X";
+    const playerOName = prompt("Player O:s namne: ") || "Player O";
 
     this.playerX = new Player(playerXName, "X");
     this.playerO = new Player(playerOName, "O");
@@ -23,10 +23,10 @@ export default class Game {
     console.clear();
     console.log("Connect Four\n");
     console.log(
-      `Spelare X: ${this.playerX.name} med marker: ${this.playerX.marker}`
+      `Player X: ${this.playerX.name} with markers: ${this.playerX.marker}`
     );
     console.log(
-      `Spelare O: ${this.playerO.name} med marker: ${this.playerO.marker}`
+      `Player O: ${this.playerO.name} with markers: ${this.playerO.marker}`
     );
   }
 
@@ -37,7 +37,7 @@ export default class Game {
       console.clear();
       this.board.render();
       const move = prompt(
-        `${currentPlayer.name} (${currentPlayer.marker}), ange en kolumn (1-7): `
+        `${currentPlayer.name} (${currentPlayer.marker}), specify a column (1-7): `
       );
       const column = +move.trim() - 1;
 
@@ -46,12 +46,12 @@ export default class Game {
         column >= this.board.matrix[0].length ||
         isNaN(column)
       ) {
-        console.log("Ogiltigt drag, försök igen.");
+        console.log("Invalid move, try again.");
         continue;
       }
 
       if (!this.board.makeMove(currentPlayer.marker, column)) {
-        console.log("Kolumnen är full, välj en annan.");
+        console.log("The column is full, please choose another.");
         continue;
       }
 
@@ -60,7 +60,7 @@ export default class Game {
         console.clear();
         this.board.render();
         console.log(
-          `${currentPlayer.name} har vunnit med marker ${currentPlayer.marker}!`
+          `${currentPlayer.name} has won with marker ${currentPlayer.marker}!`
         );
         break;
       }

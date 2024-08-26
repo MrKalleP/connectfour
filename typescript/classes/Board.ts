@@ -21,7 +21,7 @@ export default class Board {
         }
       }
     }
-
+    // Check horizontal lines
     for (let col = 0; col < 7; col++) {
       for (let row = 0; row < 3; row++) {
         const marker = this.matrix[row][col];
@@ -35,7 +35,7 @@ export default class Board {
         }
       }
     }
-
+    //check vericel lines
     for (let row = 0; row < 3; row++) {
       for (let col = 0; col < 4; col++) {
         const marker = this.matrix[row][col];
@@ -49,7 +49,7 @@ export default class Board {
         }
       }
     }
-
+    //diagonal top left to bottom right
     for (let row = 3; row < 6; row++) {
       for (let col = 0; col < 4; col++) {
         const marker = this.matrix[row][col];
@@ -64,6 +64,7 @@ export default class Board {
       }
     }
 
+    //diagonal let to top right
     return null;
   }
 
@@ -75,7 +76,7 @@ export default class Board {
     const boardString = this.matrix
       .map((row) => {
         const rowString = row
-          .map((cell) => ` ${cell === null ? " " : cell} `)
+          .map((element) => ` ${element === null ? " " : element} `)
           .join("|");
         return `${horizontalSeparator}\n|${rowString}|`;
       })
