@@ -22,7 +22,7 @@ export default class Game {
     startGameLoop() {
         let currentPlayer = this.playerX;
         while (true) {
-            this.board.render(); // Render the board before each move
+            this.board.render();
             const move = prompt(`${currentPlayer.name} (${currentPlayer.marker}), ange en kolumn (1-7): `);
             const column = +move.trim() - 1;
             if (column < 0 ||
@@ -34,6 +34,12 @@ export default class Game {
             if (!this.board.makeMove(currentPlayer.marker, column)) {
                 console.log("Kolumnen är full, välj en annan.");
                 continue;
+            }
+            const winner = this.board.checkWinner();
+            if (winner) {
+                this.board.render();
+                console.log(`${currentPlayer.name} har vunnit med marker ${currentPlayer.marker}!`);
+                return;
             }
             currentPlayer =
                 currentPlayer === this.playerX ? this.playerO : this.playerX;
