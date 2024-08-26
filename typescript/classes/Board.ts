@@ -8,63 +8,46 @@ export default class Board {
   }
 
   checkWinner(): string | null {
+    const directions = [
+      { row: 0, col: 1 }, // Horizontal
+      { row: 1, col: 0 }, // Vertical
+      { row: 1, col: 1 }, // Diagonal top-left to bottom-right
+      { row: -1, col: 1 }, // Diagonal bottom-left to top-right
+    ];
+
+    const checkDirection = (
+      startRow: number,
+      startCol: number,
+      directionRow: number,
+      directionCol: number
+    ): string | null => {
+      const marker = this.matrix[startRow][startCol];
+      if (marker === " ") return null;
+      for (let i = 1; i < 4; i++) {
+        const row = startRow + directionRow * i;
+        const col = startCol + directionCol * i;
+        if (
+          row < 0 ||
+          row >= 6 ||
+          col < 0 ||
+          col >= 7 ||
+          this.matrix[row][col] !== marker
+        ) {
+          return null;
+        }
+      }
+      return marker;
+    };
+
     for (let row = 0; row < 6; row++) {
-      for (let col = 0; col < 4; col++) {
-        const marker = this.matrix[row][col];
-        if (
-          marker !== " " &&
-          marker === this.matrix[row][col + 1] &&
-          marker === this.matrix[row][col + 2] &&
-          marker === this.matrix[row][col + 3]
-        ) {
-          return marker;
-        }
-      }
-    }
-    // Check horizontal lines
-    for (let col = 0; col < 7; col++) {
-      for (let row = 0; row < 3; row++) {
-        const marker = this.matrix[row][col];
-        if (
-          marker !== " " &&
-          marker === this.matrix[row + 1][col] &&
-          marker === this.matrix[row + 2][col] &&
-          marker === this.matrix[row + 3][col]
-        ) {
-          return marker;
-        }
-      }
-    }
-    //check vericel lines
-    for (let row = 0; row < 3; row++) {
-      for (let col = 0; col < 4; col++) {
-        const marker = this.matrix[row][col];
-        if (
-          marker !== " " &&
-          marker === this.matrix[row + 1][col + 1] &&
-          marker === this.matrix[row + 2][col + 2] &&
-          marker === this.matrix[row + 3][col + 3]
-        ) {
-          return marker;
-        }
-      }
-    }
-    //diagonal top left to bottom right
-    for (let row = 3; row < 6; row++) {
-      for (let col = 0; col < 4; col++) {
-        const marker = this.matrix[row][col];
-        if (
-          marker !== " " &&
-          marker === this.matrix[row - 1][col + 1] &&
-          marker === this.matrix[row - 2][col + 2] &&
-          marker === this.matrix[row - 3][col + 3]
-        ) {
-          return marker;
+      for (let col = 0; col < 7; col++) {
+        for (const { row: dRow, col: dCol } of directions) {
+          const winner = checkDirection(row, col, dRow, dCol);
+          if (winner) return winner;
         }
       }
     }
 
-    //diagonal let to top right
     return null;
   }
 

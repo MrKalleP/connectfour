@@ -22,6 +22,7 @@ export default class Game {
 
     console.clear();
     console.log("Connect Four\n");
+
     console.log(
       `Player X: ${this.playerX.name} with markers: ${this.playerX.marker}`
     );

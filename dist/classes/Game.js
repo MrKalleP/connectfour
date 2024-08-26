@@ -10,37 +10,37 @@ export default class Game {
         this.startGameLoop();
     }
     createPlayers() {
-        const playerXName = prompt("Spelare X:s namn: ") || "Spelare X";
-        const playerOName = prompt("Spelare O:s namn: ") || "Spelare O";
+        const playerXName = prompt("Player X:s namne: ") || "Player X";
+        const playerOName = prompt("Player O:s namne: ") || "Player O";
         this.playerX = new Player(playerXName, "X");
         this.playerO = new Player(playerOName, "O");
         console.clear();
         console.log("Connect Four\n");
-        console.log(`Spelare X: ${this.playerX.name} med marker: ${this.playerX.marker}`);
-        console.log(`Spelare O: ${this.playerO.name} med marker: ${this.playerO.marker}`);
+        console.log(`Player X: ${this.playerX.name} with markers: ${this.playerX.marker}`);
+        console.log(`Player O: ${this.playerO.name} with markers: ${this.playerO.marker}`);
     }
     startGameLoop() {
         let currentPlayer = this.playerX;
         while (true) {
             console.clear();
             this.board.render();
-            const move = prompt(`${currentPlayer.name} (${currentPlayer.marker}), ange en kolumn (1-7): `);
+            const move = prompt(`${currentPlayer.name} (${currentPlayer.marker}), specify a column (1-7): `);
             const column = +move.trim() - 1;
             if (column < 0 ||
                 column >= this.board.matrix[0].length ||
                 isNaN(column)) {
-                console.log("Ogiltigt drag, försök igen.");
+                console.log("Invalid move, try again.");
                 continue;
             }
             if (!this.board.makeMove(currentPlayer.marker, column)) {
-                console.log("Kolumnen är full, välj en annan.");
+                console.log("The column is full, please choose another.");
                 continue;
             }
             const winner = this.board.checkWinner();
             if (winner) {
                 console.clear();
                 this.board.render();
-                console.log(`${currentPlayer.name} har vunnit med marker ${currentPlayer.marker}!`);
+                console.log(`${currentPlayer.name} has won with marker ${currentPlayer.marker}!`);
                 break;
             }
             currentPlayer =
