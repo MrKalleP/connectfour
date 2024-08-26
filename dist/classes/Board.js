@@ -4,12 +4,9 @@ export default class Board {
             .fill(null)
             .map(() => Array(7).fill(" "));
     }
-    // Function to check for a winner
     checkWinner() {
-        // Check horizontal lines
         for (let row = 0; row < 6; row++) {
             for (let col = 0; col < 4; col++) {
-                // Only need to check up to the 4th column
                 const marker = this.matrix[row][col];
                 if (marker !== " " &&
                     marker === this.matrix[row][col + 1] &&
@@ -19,10 +16,8 @@ export default class Board {
                 }
             }
         }
-        // Check vertical lines
         for (let col = 0; col < 7; col++) {
             for (let row = 0; row < 3; row++) {
-                // Only need to check up to the 3rd row
                 const marker = this.matrix[row][col];
                 if (marker !== " " &&
                     marker === this.matrix[row + 1][col] &&
@@ -32,7 +27,6 @@ export default class Board {
                 }
             }
         }
-        // Check diagonal lines (top-left to bottom-right)
         for (let row = 0; row < 3; row++) {
             for (let col = 0; col < 4; col++) {
                 const marker = this.matrix[row][col];
@@ -44,7 +38,6 @@ export default class Board {
                 }
             }
         }
-        // Check diagonal lines (bottom-left to top-right)
         for (let row = 3; row < 6; row++) {
             for (let col = 0; col < 4; col++) {
                 const marker = this.matrix[row][col];
@@ -56,14 +49,22 @@ export default class Board {
                 }
             }
         }
-        // No winner found
         return null;
     }
     render() {
         console.clear();
-        this.matrix.forEach((row) => console.log(row.join("|")));
-        console.log("-".repeat(this.matrix[0].length * 2 - 1));
-        console.log("1 2 3 4 5 6 7");
+        const horizontalSeparator = "+---".repeat(7) + "+";
+        const boardString = this.matrix
+            .map((row) => {
+            const rowString = row
+                .map((cell) => ` ${cell === null ? " " : cell} `)
+                .join("|");
+            return `${horizontalSeparator}\n|${rowString}|`;
+        })
+            .join("\n");
+        console.log(boardString);
+        console.log(horizontalSeparator);
+        console.log("  1   2   3   4   5   6   7");
     }
     makeMove(marker, column) {
         for (let row = this.matrix.length - 1; row >= 0; row--) {

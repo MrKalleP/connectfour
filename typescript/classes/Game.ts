@@ -34,6 +34,7 @@ export default class Game {
     let currentPlayer = this.playerX;
 
     while (true) {
+      console.clear();
       this.board.render();
       const move = prompt(
         `${currentPlayer.name} (${currentPlayer.marker}), ange en kolumn (1-7): `
@@ -56,13 +57,13 @@ export default class Game {
 
       const winner = this.board.checkWinner();
       if (winner) {
+        console.clear();
         this.board.render();
         console.log(
           `${currentPlayer.name} har vunnit med marker ${currentPlayer.marker}!`
         );
-        return;
+        break;
       }
-
       currentPlayer =
         currentPlayer === this.playerX ? this.playerO : this.playerX;
     }

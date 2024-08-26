@@ -69,9 +69,21 @@ export default class Board {
 
   render(): void {
     console.clear();
-    this.matrix.forEach((row) => console.log(row.join("|")));
-    console.log("-".repeat(this.matrix[0].length * 2 - 1));
-    console.log("1 2 3 4 5 6 7");
+
+    const horizontalSeparator = "+---".repeat(7) + "+";
+
+    const boardString = this.matrix
+      .map((row) => {
+        const rowString = row
+          .map((cell) => ` ${cell === null ? " " : cell} `)
+          .join("|");
+        return `${horizontalSeparator}\n|${rowString}|`;
+      })
+      .join("\n");
+
+    console.log(boardString);
+    console.log(horizontalSeparator);
+    console.log("  1   2   3   4   5   6   7");
   }
 
   makeMove(marker: "X" | "O", column: number): boolean {
