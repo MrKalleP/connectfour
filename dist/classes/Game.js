@@ -3,13 +3,13 @@ import Player from "./Player.js";
 import Board from "./Board.js";
 export default class Game {
     constructor() {
-        while (true) {
-            this.createPlayer();
-            this.board = new Board();
-            this.startGameLoop();
-        }
+        this.playerX = new Player("Default X", "X");
+        this.playerO = new Player("Default O", "O");
+        this.createPlayers();
+        this.board = new Board();
+        this.startGameLoop();
     }
-    createPlayer() {
+    createPlayers() {
         const playerXName = prompt("Spelare X:s namn: ") || "Spelare X";
         const playerOName = prompt("Spelare O:s namn: ") || "Spelare O";
         this.playerX = new Player(playerXName, "X");
@@ -20,19 +20,24 @@ export default class Game {
         console.log(`Spelare O: ${this.playerO.name} med marker: ${this.playerO.marker}`);
     }
     startGameLoop() {
-        while (!this.board.gameOver) {
-            console.clear();
-            this.board.render();
-            const player = this.board.currentPlayerColor === "X" ? this.playerX : this.playerO;
-            const move = prompt(`Ange ditt drag ${player.marker} ${player.name} - skriv in kolumn: `);
+        let currentPlayer = this.playerX;
+        while (true) {
+            this.board.render(); // Render the board before each move
+            const move = prompt(`${currentPlayer.name} (${currentPlayer.marker}), ange en kolumn (1-7): `);
             const column = +move.trim() - 1;
-            console.log(column);
-            /* if (!this.board.makeMove(player.marker, column)) {
-              continue;
-            } */
+            if (column < 0 ||
+                column >= this.board.matrix[0].length ||
+                isNaN(column)) {
+                console.log("Ogiltigt drag, försök igen.");
+                continue;
+            }
+            if (!this.board.makeMove(currentPlayer.marker, column)) {
+                console.log("Kolumnen är full, välj en annan.");
+                continue;
+            }
+            currentPlayer =
+                currentPlayer === this.playerX ? this.playerO : this.playerX;
         }
-        console.clear();
-        this.board.render();
     }
 }
 //# sourceMappingURL=Game.js.map

@@ -5,6 +5,6 @@ export default class Game {
     playerO: Player;
     board: Board;
     constructor();
-    createPlayer(): void;
+    createPlayers(): void;
     startGameLoop(): void;
 }

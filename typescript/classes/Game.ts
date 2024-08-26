@@ -3,19 +3,17 @@ import Player from "./Player.js";
 import Board from "./Board.js";
 
 export default class Game {
-  playerX: Player;
-  playerO: Player;
+  playerX: Player = new Player("Default X", "X");
+  playerO: Player = new Player("Default O", "O");
   board: Board;
 
   constructor() {
-    while (true) {
-      this.createPlayer();
-      this.board = new Board();
-      this.startGameLoop();
-    }
+    this.createPlayers();
+    this.board = new Board();
+    this.startGameLoop();
   }
 
-  createPlayer() {
+  createPlayers() {
     const playerXName = prompt("Spelare X:s namn: ") || "Spelare X";
     const playerOName = prompt("Spelare O:s namn: ") || "Spelare O";
 
@@ -24,7 +22,6 @@ export default class Game {
 
     console.clear();
     console.log("Connect Four\n");
-
     console.log(
       `Spelare X: ${this.playerX.name} med marker: ${this.playerX.marker}`
     );
@@ -34,23 +31,31 @@ export default class Game {
   }
 
   startGameLoop() {
-    while (!this.board.gameOver) {
-      console.clear();
-      this.board.render();
-      const player =
-        this.board.currentPlayerColor === "X" ? this.playerX : this.playerO;
+    let currentPlayer = this.playerX;
+
+    while (true) {
+      this.board.render(); // Render the board before each move
       const move = prompt(
-        `Ange ditt drag ${player.marker} ${player.name} - skriv in kolumn: `
+        `${currentPlayer.name} (${currentPlayer.marker}), ange en kolumn (1-7): `
       );
       const column = +move.trim() - 1;
-      console.log(column);
 
-      /* if (!this.board.makeMove(player.marker, column)) {
+      if (
+        column < 0 ||
+        column >= this.board.matrix[0].length ||
+        isNaN(column)
+      ) {
+        console.log("Ogiltigt drag, försök igen.");
         continue;
-      } */
-    }
+      }
 
-    console.clear();
-    this.board.render();
+      if (!this.board.makeMove(currentPlayer.marker, column)) {
+        console.log("Kolumnen är full, välj en annan.");
+        continue;
+      }
+
+      currentPlayer =
+        currentPlayer === this.playerX ? this.playerO : this.playerX;
+    }
   }
 }

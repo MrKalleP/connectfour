@@ -1,9 +1,6 @@
 export default class Board {
-    grid: string[][];
-    currentPlayerColor: string;
-    winner: boolean;
-    isADraw: boolean;
-    gameOver: boolean;
+    matrix: string[][];
     constructor();
     render(): void;
+    makeMove(marker: "X" | "O", column: number): boolean;
 }
