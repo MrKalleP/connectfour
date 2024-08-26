@@ -1,5 +1,5 @@
 export default class Board {
-    matrix: string[][];
+    gamePlan: string[][];
     constructor();
     checkWinner(): string | null;
     render(): void;

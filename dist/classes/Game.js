@@ -27,7 +27,7 @@ export default class Game {
             const move = prompt(`${currentPlayer.name} (${currentPlayer.marker}), specify a column (1-7): `);
             const column = +move.trim() - 1;
             if (column < 0 ||
-                column >= this.board.matrix[0].length ||
+                column >= this.board.gamePlan[0].length ||
                 isNaN(column)) {
                 console.log("Invalid move, try again.");
                 continue;

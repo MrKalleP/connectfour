@@ -1,28 +1,28 @@
 export default class Board {
     constructor() {
-        this.matrix = Array(6)
+        this.gamePlan = Array(6)
             .fill(null)
             .map(() => Array(7).fill(" "));
     }
     checkWinner() {
-        const directions = [
+        const matrixDirections = [
             { row: 0, col: 1 }, // Horizontal
             { row: 1, col: 0 }, // Vertical
             { row: 1, col: 1 }, // Diagonal top-left to bottom-right
             { row: -1, col: 1 }, // Diagonal bottom-left to top-right
         ];
-        const checkDirection = (startRow, startCol, directionRow, directionCol) => {
-            const marker = this.matrix[startRow][startCol];
+        const checkDirection = (startingRow, startingColumn, directionRows, directionColumns) => {
+            const marker = this.gamePlan[startingRow][startingColumn];
             if (marker === " ")
                 return null;
             for (let i = 1; i < 4; i++) {
-                const row = startRow + directionRow * i;
-                const col = startCol + directionCol * i;
+                const row = startingRow + directionRows * i;
+                const col = startingColumn + directionColumns * i;
                 if (row < 0 ||
                     row >= 6 ||
                     col < 0 ||
                     col >= 7 ||
-                    this.matrix[row][col] !== marker) {
+                    this.gamePlan[row][col] !== marker) {
                     return null;
                 }
             }
@@ -30,8 +30,8 @@ export default class Board {
         };
         for (let row = 0; row < 6; row++) {
             for (let col = 0; col < 7; col++) {
-                for (const { row: dRow, col: dCol } of directions) {
-                    const winner = checkDirection(row, col, dRow, dCol);
+                for (const { row: directionsRow, col: directionsColumn, } of matrixDirections) {
+                    const winner = checkDirection(row, col, directionsRow, directionsColumn);
                     if (winner)
                         return winner;
                 }
@@ -42,7 +42,7 @@ export default class Board {
     render() {
         console.clear();
         const horizontalSeparator = "+---".repeat(7) + "+";
-        const boardString = this.matrix
+        const boardString = this.gamePlan
             .map((row) => {
             const rowString = row
                 .map((element) => ` ${element === null ? " " : element} `)
@@ -55,9 +55,12 @@ export default class Board {
         console.log("  1   2   3   4   5   6   7");
     }
     makeMove(marker, column) {
-        for (let row = this.matrix.length - 1; row >= 0; row--) {
-            if (this.matrix[row][column] === " ") {
-                this.matrix[row][column] = marker;
+        if (column < 0 || column >= this.gamePlan[0].length) {
+            return false;
+        }
+        for (let row = this.gamePlan.length - 1; row >= 0; row--) {
+            if (this.gamePlan[row][column] === " ") {
+                this.gamePlan[row][column] = marker;
                 return true;
             }
         }

@@ -44,7 +44,7 @@ export default class Game {
 
       if (
         column < 0 ||
-        column >= this.board.matrix[0].length ||
+        column >= this.board.gamePlan[0].length ||
         isNaN(column)
       ) {
         console.log("Invalid move, try again.");
