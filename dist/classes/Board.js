@@ -39,6 +39,9 @@ export default class Board {
         }
         return null;
     }
+    drawCheck() {
+        return !this.checkWinner() && !this.gamePlan.flat().includes(" ");
+    }
     render() {
         console.clear();
         const horizontalSeparator = "+---".repeat(7) + "+";

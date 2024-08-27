@@ -15,7 +15,6 @@ export default class Game {
         this.playerX = new Player(playerXName, "X");
         this.playerO = new Player(playerOName, "O");
         console.clear();
-        console.log("Connect Four\n");
         console.log(`Player X: ${this.playerX.name} with markers: ${this.playerX.marker}`);
         console.log(`Player O: ${this.playerO.name} with markers: ${this.playerO.marker}`);
     }
@@ -29,11 +28,13 @@ export default class Game {
             if (column < 0 ||
                 column >= this.board.gamePlan[0].length ||
                 isNaN(column)) {
-                console.log("Invalid move, try again.");
+                const wrongMove = prompt("Invalid move, try again.");
+                console.log(wrongMove);
                 continue;
             }
             if (!this.board.makeMove(currentPlayer.marker, column)) {
-                console.log("The column is full, please choose another.");
+                const fullColumn = prompt("The column is full, please choose another.");
+                console.log(fullColumn);
                 continue;
             }
             const winner = this.board.checkWinner();
@@ -41,6 +42,12 @@ export default class Game {
                 console.clear();
                 this.board.render();
                 console.log(`${currentPlayer.name} has won with marker ${currentPlayer.marker}!`);
+                break;
+            }
+            if (this.board.drawCheck()) {
+                console.clear();
+                this.board.render();
+                console.log("The game is a draw!");
                 break;
             }
             currentPlayer =

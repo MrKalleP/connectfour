@@ -21,7 +21,6 @@ export default class Game {
     this.playerO = new Player(playerOName, "O");
 
     console.clear();
-    console.log("Connect Four\n");
 
     console.log(
       `Player X: ${this.playerX.name} with markers: ${this.playerX.marker}`
@@ -33,7 +32,6 @@ export default class Game {
 
   startGameLoop() {
     let currentPlayer = this.playerX;
-
     while (true) {
       console.clear();
       this.board.render();
@@ -47,12 +45,14 @@ export default class Game {
         column >= this.board.gamePlan[0].length ||
         isNaN(column)
       ) {
-        console.log("Invalid move, try again.");
+        const wrongMove = prompt("Invalid move, try again.");
+        console.log(wrongMove);
         continue;
       }
 
       if (!this.board.makeMove(currentPlayer.marker, column)) {
-        console.log("The column is full, please choose another.");
+        const fullColumn = prompt("The column is full, please choose another.");
+        console.log(fullColumn);
         continue;
       }
 
@@ -65,6 +65,14 @@ export default class Game {
         );
         break;
       }
+
+      if (this.board.drawCheck()) {
+        console.clear();
+        this.board.render();
+        console.log("The game is a draw!");
+        break;
+      }
+
       currentPlayer =
         currentPlayer === this.playerX ? this.playerO : this.playerX;
     }

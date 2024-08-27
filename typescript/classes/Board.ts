@@ -55,8 +55,11 @@ export default class Board {
         }
       }
     }
-
     return null;
+  }
+
+  drawCheck() {
+    return !this.checkWinner() && !this.gamePlan.flat().includes(" ");
   }
 
   render(): void {
@@ -89,7 +92,6 @@ export default class Board {
         return true;
       }
     }
-
     return false;
   }
 }
