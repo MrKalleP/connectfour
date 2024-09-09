@@ -44,7 +44,7 @@ export default class Board {
     }
     render() {
         console.clear();
-        console.log(`          Connect 4         `);
+        console.log(`          CONNECT 4         `);
         const horizontalSeparator = '+---'.repeat(7) + '+';
         const boardString = this.gamePlan
             .map((row) => {
@@ -56,7 +56,7 @@ export default class Board {
             .join('\n');
         console.log(boardString);
         console.log(horizontalSeparator);
-        console.log('  1   2   3   4   5   6   7');
+        console.log(`  1   2   3   4   5   6   7 \n`);
     }
     makeMove(marker, column) {
         if (column < 0 || column >= this.gamePlan[0].length) {

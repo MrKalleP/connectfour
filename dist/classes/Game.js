@@ -55,7 +55,7 @@ export default class Game {
             if (winner) {
                 console.clear();
                 this.board.render();
-                console.log(`${currentPlayer.name} has won with marker ${currentPlayer.marker}!\n`);
+                console.log(` ${currentPlayer.name} has won with marker ${currentPlayer.marker}!\n`);
                 break;
             }
             if (this.board.drawCheck()) {

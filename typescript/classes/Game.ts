@@ -82,7 +82,7 @@ export default class Game {
         console.clear();
         this.board.render();
         console.log(
-          `${currentPlayer.name} has won with marker ${currentPlayer.marker}!\n`
+          ` ${currentPlayer.name} has won with marker ${currentPlayer.marker}!\n`
         );
         break;
       }

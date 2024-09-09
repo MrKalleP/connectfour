@@ -65,7 +65,7 @@ export default class Board {
   render(): void {
     console.clear();
 
-    console.log(`          Connect 4         `);
+    console.log(`          CONNECT 4         `);
 
     const horizontalSeparator = '+---'.repeat(7) + '+';
 
@@ -80,7 +80,7 @@ export default class Board {
 
     console.log(boardString);
     console.log(horizontalSeparator);
-    console.log('  1   2   3   4   5   6   7');
+    console.log(`  1   2   3   4   5   6   7 \n`);
   }
 
   makeMove(marker: 'X' | 'O', column: number): boolean {
