@@ -2,7 +2,7 @@ export default class Board {
     constructor() {
         this.gamePlan = Array(6)
             .fill(null)
-            .map(() => Array(7).fill(" "));
+            .map(() => Array(7).fill(' '));
     }
     checkWinner() {
         const matrixDirections = [
@@ -13,7 +13,7 @@ export default class Board {
         ];
         const checkDirection = (startingRow, startingColumn, directionRows, directionColumns) => {
             const marker = this.gamePlan[startingRow][startingColumn];
-            if (marker === " ")
+            if (marker === ' ')
                 return null;
             for (let i = 1; i < 4; i++) {
                 const row = startingRow + directionRows * i;
@@ -40,29 +40,30 @@ export default class Board {
         return null;
     }
     drawCheck() {
-        return !this.checkWinner() && !this.gamePlan.flat().includes(" ");
+        return !this.checkWinner() && !this.gamePlan.flat().includes(' ');
     }
     render() {
         console.clear();
-        const horizontalSeparator = "+---".repeat(7) + "+";
+        console.log(`          Connect 4         `);
+        const horizontalSeparator = '+---'.repeat(7) + '+';
         const boardString = this.gamePlan
             .map((row) => {
             const rowString = row
-                .map((element) => ` ${element === null ? " " : element} `)
-                .join("|");
+                .map((element) => ` ${element === null ? ' ' : element} `)
+                .join('|');
             return `${horizontalSeparator}\n|${rowString}|`;
         })
-            .join("\n");
+            .join('\n');
         console.log(boardString);
         console.log(horizontalSeparator);
-        console.log("  1   2   3   4   5   6   7");
+        console.log('  1   2   3   4   5   6   7');
     }
     makeMove(marker, column) {
         if (column < 0 || column >= this.gamePlan[0].length) {
             return false;
         }
         for (let row = this.gamePlan.length - 1; row >= 0; row--) {
-            if (this.gamePlan[row][column] === " ") {
+            if (this.gamePlan[row][column] === ' ') {
                 this.gamePlan[row][column] = marker;
                 return true;
             }

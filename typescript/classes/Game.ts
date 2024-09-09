@@ -1,11 +1,11 @@
-import prompt from "../helpers/prompt.js";
-import Player from "./Player.js";
-import Board from "./Board.js";
-import AIPlayer from "./AiPlayer.js";
+import prompt from '../helpers/prompt.js';
+import Player from './Player.js';
+import Board from './Board.js';
+import AIPlayer from './AiPlayer.js';
 
 export default class Game {
-  playerX: Player = new Player("Default X", "X");
-  playerO: Player = new Player("Default O", "O");
+  playerX: Player = new Player('Default X', 'X');
+  playerO: Player = new Player('Default O', 'O');
   board: Board;
 
   constructor() {
@@ -16,18 +16,18 @@ export default class Game {
 
   createPlayers() {
     const playerXName =
-      prompt("Player X:s namn (or type 'AI' for AI player): ") || "Player X";
+      prompt("Player X:s namn (or type 'AI' for AI player): ") || 'Player X';
     const playerOName =
-      prompt("Player O:s namn (or type 'AI' for AI player): ") || "Player O";
+      prompt("Player O:s namn (or type 'AI' for AI player): ") || 'Player O';
 
     this.playerX =
-      playerXName.toLowerCase() === "ai"
-        ? new AIPlayer("AI X", "X")
-        : new Player(playerXName, "X");
+      playerXName.toLowerCase() === 'ai'
+        ? new AIPlayer('AI X', 'X')
+        : new Player(playerXName, 'X');
     this.playerO =
-      playerOName.toLowerCase() === "ai"
-        ? new AIPlayer("AI O", "O")
-        : new Player(playerOName, "O");
+      playerOName.toLowerCase() === 'ai'
+        ? new AIPlayer('AI O', 'O')
+        : new Player(playerOName, 'O');
 
     console.clear();
 
@@ -65,14 +65,14 @@ export default class Game {
           column >= this.board.gamePlan[0].length ||
           isNaN(column)
         ) {
-          const wrongMove = prompt("Invalid move, try again.");
+          const wrongMove = prompt('Invalid move, try again.');
           console.log(wrongMove);
           continue;
         }
       }
 
       if (!this.board.makeMove(currentPlayer.marker, column)) {
-        const fullColumn = prompt("The column is full, please choose another.");
+        const fullColumn = prompt('The column is full, please choose another.');
         console.log(fullColumn);
         continue;
       }
@@ -82,7 +82,7 @@ export default class Game {
         console.clear();
         this.board.render();
         console.log(
-          `${currentPlayer.name} has won with marker ${currentPlayer.marker}!`
+          `${currentPlayer.name} has won with marker ${currentPlayer.marker}!\n`
         );
         break;
       }
@@ -90,7 +90,7 @@ export default class Game {
       if (this.board.drawCheck()) {
         console.clear();
         this.board.render();
-        console.log("The game is a draw!");
+        console.log('The game is a draw!');
         break;
       }
 

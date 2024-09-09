@@ -1,5 +1,5 @@
-import Player from "./Player.js";
-import Board from "./Board.js";
+import Player from './Player.js';
+import Board from './Board.js';
 export default class Game {
     playerX: Player;
     playerO: Player;

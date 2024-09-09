@@ -4,5 +4,5 @@ export default class Board {
     checkWinner(): string | null;
     drawCheck(): boolean;
     render(): void;
-    makeMove(marker: "X" | "O", column: number): boolean;
+    makeMove(marker: 'X' | 'O', column: number): boolean;
 }
